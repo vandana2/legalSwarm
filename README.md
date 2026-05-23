@@ -1,0 +1,2 @@
+# legalSwarm
+Hackathon project
