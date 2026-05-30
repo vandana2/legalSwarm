@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes import upload, analyze
+from routes import contract_routes
 import os
 from dotenv import load_dotenv
 
@@ -23,7 +24,8 @@ app.add_middleware(
 
 # Include routers
 app.include_router(upload.router)
-app.include_router(analyze.router)
+app.include_router(analyze.router)          # text-based analysis
+app.include_router(contract_routes.router)  # PDF upload + analysis
 
 @app.get("/")
 def read_root():

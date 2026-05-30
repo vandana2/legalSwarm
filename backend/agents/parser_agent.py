@@ -147,8 +147,8 @@ class ParserAgent:
         Returns:
             List of structured clause dictionaries
         """
-        # Clean the text
-        text = self.extract_text(raw_text)
+        # Strip only — do NOT collapse newlines, they are needed by identify_sections
+        text = raw_text.strip()
         
         if not text:
             return []

@@ -127,8 +127,8 @@ class RiskDetectorAgent:
                 r'late\s+fee',
             ],
             'medium': [
-                r'payment',
-                r'fees',
+                r'payment\s+penalt',
+                r'fees.*?non.?refundable',
             ]
         },
         'confidentiality': {
@@ -240,7 +240,7 @@ class RiskDetectorAgent:
         )
         
         self.detections.append(detection)
-        return detection
+        return asdict(detection)
     
     def detect_risks_batch(self, clauses: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
@@ -257,7 +257,7 @@ class RiskDetectorAgent:
         
         for clause in clauses:
             detection = self.detect_risks(clause)
-            results.append(asdict(detection))
+            results.append(detection)
         
         return results
     

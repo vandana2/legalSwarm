@@ -128,7 +128,7 @@ class RedlineAgent:
     def __init__(self):
         self.redlines: List[Redline] = []
     
-    def suggest_redline(self, clause: Dict[str, Any], risk_level: str) -> Redline:
+    def suggest_redline(self, clause: Dict[str, Any], risk_level: str) -> Dict[str, Any]:
         """
         Suggest safer alternative language for a risky clause
         
@@ -160,7 +160,7 @@ class RedlineAgent:
         )
         
         self.redlines.append(redline)
-        return redline
+        return asdict(redline)
     
     def suggest_redlines_batch(self, clauses: List[Dict[str, Any]], 
                                risk_levels: List[str]) -> List[Dict[str, Any]]:
@@ -179,7 +179,7 @@ class RedlineAgent:
         
         for clause, risk_level in zip(clauses, risk_levels):
             redline = self.suggest_redline(clause, risk_level)
-            results.append(asdict(redline))
+            results.append(redline)
         
         return results
     
